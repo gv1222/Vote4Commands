@@ -29,6 +29,7 @@ public class Vote4Commands extends Plugin implements Listener {
 
     @Override
     public void onEnable() {
+        this.getProxy().getPluginManager().registerListener(this, this);
         this.config = new MainConfig(this);
         try {
             this.config.init();
