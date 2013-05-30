@@ -1,0 +1,4 @@
+name: ${name}
+version: ${version}-${build.version}
+author: roblabla
+main: net.craftminecraft.bungee.vote4commands.Vote4Commands
