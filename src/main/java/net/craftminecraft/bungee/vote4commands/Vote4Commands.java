@@ -67,7 +67,7 @@ public class Vote4Commands extends Plugin implements Listener {
                         }
                     }
                 }
-            }, config.votenag_interval, TimeUnit.MINUTES);
+            }, config.votenag_interval, config.votenag_interval, TimeUnit.MINUTES);
         }
     }
 
@@ -80,8 +80,10 @@ public class Vote4Commands extends Plugin implements Listener {
             if (p.getName().equalsIgnoreCase(username)) {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', 
                         config.confirmvotemessage));
-                break;
+                continue;
             }
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                        config.playervotedmessage).replace("%player%", username));
         }
     }
 
