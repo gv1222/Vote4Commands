@@ -46,12 +46,23 @@ public class Vote4Commands extends Plugin implements Listener {
                     return;
                 }
                 
+                int votes = 1;
+                if (args.length > 0) {
+                    try {
+                        votes = Integer.parseInt(args[0]);
+                    } catch (NumberFormatException ex) {
+                        sender.sendMessage("Invalid number given");
+                        return;
+                    }
+                }
                 ProxiedPlayer p = (ProxiedPlayer) sender;
                 String username = p.getName().toLowerCase();
 
-                if (voters.get(username) > 0) {
-                    Vote4Commands.this.giveReward(p);
-                    voters.decrementAndGet(username);
+                if (voters.get(username) >= votes) {
+                    voters.getAndAdd(username, votes);
+                    for (;votes != 0;votes--) {
+                        Vote4Commands.this.giveReward(p);
+                    }
                 }
             }
         });
@@ -82,8 +93,10 @@ public class Vote4Commands extends Plugin implements Listener {
                         config.confirmvotemessage));
                 continue;
             }
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&',
+            if (config.enableplayervotedmessage) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&',
                         config.playervotedmessage).replace("%player%", username));
+            }
         }
     }
 

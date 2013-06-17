@@ -23,6 +23,8 @@ public class MainConfig extends Config {
     public boolean blockCommands = true;
     @Comment("List of commands to run when a player confirms his vote.")
     public List<String> commands = Lists.newArrayList("/i diamond 1");
+    @Comment("Set to false to disable broadcasting a message when a player voted")
+    public boolean enableplayervotedmessage = true;
     @Comment("Message sent when a player has voted")
     public String playervotedmessage = "&3%player% has voted!";
     @Comment("Should we send a nag to all players if they didn't vote in the last 24 hours ?")
