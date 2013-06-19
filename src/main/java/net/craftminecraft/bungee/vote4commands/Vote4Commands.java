@@ -59,7 +59,7 @@ public class Vote4Commands extends Plugin implements Listener {
                 String username = p.getName().toLowerCase();
 
                 if (voters.get(username) >= votes) {
-                    voters.getAndAdd(username, votes);
+                    voters.getAndAdd(username, -votes);
                     for (;votes != 0;votes--) {
                         Vote4Commands.this.giveReward(p);
                     }
